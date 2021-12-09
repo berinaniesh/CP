@@ -1,13 +1,11 @@
 #include<iostream>
-//#include<math.h>
-
-//#define U64 unsigned long long
+//accepted
 
 int main () {
     int n;
     std::cin >> n;
-    int n1[n];
-    int n2[n];
+    float n1[n];
+    float n2[n];
     int zero1[n]; 
     int zero2[n];
 
@@ -19,9 +17,15 @@ int main () {
     }
     
     for (int i=0; i<n; i++) {
-        if (n1[i] > 9) {
-            
+        while (n1[i] >= 10) {
+            n1[i] = n1[i]/10;
+            zero1[i]++;
         }
+        while (n2[i] >= 10) {
+            n2[i] = n2[i]/10;
+            zero2[i]++;
+        }
+
     }
 
     for (int i=0; i<n; i++) {
@@ -29,12 +33,21 @@ int main () {
             std::cout << '=' << std::endl;
             continue;
         }
+        if (n1[i] == 0 && n2[i] !=0) {
+            std::cout << '<' << std::endl;
+            continue;
+        }
+        if (n1[i] !=0 && n2[i] == 0) {
+            std::cout << '>' << std::endl;
+            continue;
+        }
+
         if (zero1[i] == zero2[i]) {
             if (n1[i] > n2[i]) {
                 std::cout << '>' << std::endl;
                 continue;
             } else if (n1[i] < n2[i]) {
-                std::cout << '>' << std::endl;
+                std::cout << '<' << std::endl;
                 continue;
             } else {
                 std::cout << '=' << std::endl;
@@ -42,10 +55,12 @@ int main () {
             }
         }
 
-        if (zero1[i] > zero1[j]) {
-            if (n1[i] != 0) {
-
-            }
+        if (zero1[i] > zero2[i]) {
+            std::cout << '>' << std::endl;
+            continue;
+        }
+        else if (zero1[i] < zero2[i]) {
+            std::cout << '<' << std::endl;
         }
     }
 
